@@ -58,4 +58,25 @@ How does the class's Format Method work?
 
 ================================
 task 2
+How does the function work?
+    
+    -- Logger
+        =>This logger is used to capture and manage log messages related to user data operations.
 
+    -- Logger Level
+        => This ensures that log messages with severity 'INFO'.
+
+    -- Propagation
+        ---- logger.propagate = False
+        => Ensures that log messages are only handled by this specific logger and not passed up to ancestor loggers.
+
+    -- StramHandler
+        => To send log message to the console, stream handler is responsible for outputting log messages to the console.
+    
+    -- Formatter
+        => Formats the log messages according to the specified format and redacts PII fields before outputting.
+
+    -- logger.addHandler(stramHandle)
+        => Ensures that log messages captured by the 'user_data' logger are processed by the StreamHandler and outputted to the console.
+
+====
