@@ -1,14 +1,16 @@
 task 0
 How does the function work?
+
     the loop itreates over each field name in the fields list
     => fields = ["password", "date_of_birth"]
     why ? -- To process and obfuscate each specified field one by one.
 
-message = re.sub(field + "=.*?" + separator,
+    message = re.sub(field + "=.*?" + separator,
                          field + "=" + redaction + separator,
                          message)
 
-lets breakdown >>
+    lets breakdown >>
+
     field + "=.*?" + separator
      => matches the fieldName followed by an "=" and matches any character up to the next occurrence of the seprator ";"
     field + "=" + redaction + separator
@@ -17,7 +19,8 @@ lets breakdown >>
     why ? To obfuscate the value of the specified field in the message.
 =====================================
 task 1
-How does the class's Format Method work?
+    How does the class's Format Method work?
+    
     def format(self, record: logging.LogRecord) -> str:
         return filter_datum(self.fields, self.REDACTION,
                             super().format(record), self.SEPARATOR)
@@ -88,3 +91,5 @@ How does the function work?
     Returns:
 
         mysql.connector.connection.MySQLConnection: A connection object representing a connection to the MySQL database.
+
+==============================
