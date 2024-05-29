@@ -1,5 +1,5 @@
 task 0
-How does the job work?
+How does the function work?
     the loop itreates over each field name in the fields list
     => fields = ["password", "date_of_birth"]
     why ? -- To process and obfuscate each specified field one by one.
@@ -17,3 +17,43 @@ lets breakdown >>
     why ? To obfuscate the value of the specified field in the message.
 =====================================
 task 1
+How does the class's Format Method work?
+    def format(self, record: logging.LogRecord) -> str:
+        return filter_datum(self.fields, self.REDACTION,
+                            super().format(record), self.SEPARATOR)
+
+    => This method overrides the format method of the logging.Formatter class
+    to customize how log records are formatted
+     -- How does the formatting method work?
+        ``` 
+            def format(self, record):
+            """
+            Format the specified record as text.
+
+            :param record: The log record to be formatted
+            :type record: logging.LogRecord
+            :return: The formatted log message
+            :rtype: str
+            """
+            # Define the format string
+            format_str = '%(asctime)s - %(levelname)s - %(message)s'
+            
+            # Perform substitution
+            formatted_message = format_str % {
+                'asctime': self.formatTime(record),
+                'levelname': record.levelname,
+                'message': record.getMessage(),
+            }
+            
+            return formatted_message
+        ```
+        The format method is flexible, allowing you to customize the log message format according to your requirements. It's a fundamental part of Python's logging system and provides a powerful way to control how log messages are presented.
+        
+        detailed :
+        --> Calls the format method of the superclass (logging.Formatter), which formats the log record into a string based on the format specified ([HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s).
+
+    -- filter_datum() => calls the function to obfuscate sensitive information in log message to apply redaction to specified fields in the log message before formatting and returning the final log record string.
+
+    super().format(record) => Calls the format method of the superclass (logging.Formatter) to format the log record.
+
+
