@@ -79,4 +79,12 @@ How does the function work?
     -- logger.addHandler(stramHandle)
         => Ensures that log messages captured by the 'user_data' logger are processed by the StreamHandler and outputted to the console.
 
-====
+====================================
+task 3
+How does the function work?
+
+    The get_db function establishes and returns a connection to a MySQL database using the mysql.connector library. It retrieves connection parameters from environment variables for flexibility and security.
+
+    Returns:
+
+        mysql.connector.connection.MySQLConnection: A connection object representing a connection to the MySQL database.

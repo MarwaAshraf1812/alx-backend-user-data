@@ -5,6 +5,8 @@
 from typing import List
 import re
 import logging
+import mysql.connector
+import os
 
 
 PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
@@ -68,3 +70,24 @@ def get_logger() -> logging.Logger:
     logger.addHandler(stramHandle)
 
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    '''
+    you will connect to a secure holberton database
+    to read a users table. The database is protected
+    by a username and password that are set as
+    environment variables on the server named
+    PERSONAL_DATA_DB_USERNAME (set the default as “root”),
+    PERSONAL_DATA_DB_PASSWORD (set the default as an empty string)
+    and PERSONAL_DATA_DB_HOST (set the default as “localhost”).
+
+    Returns:
+         A connector to the database
+         mysql.connector.connection.MySQLConnection object.
+    '''
+    return mysql.connector.connection.MySQLConnection(
+        host=os.getenv('PERSONAL_DATA_DB_HOST', 'localhost'),
+        user=os.getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
+        password=os.getenv('PERSONAL_DATA_DB_PASSWORD', ''),
+        database=os.getenv('PERSONAL_DATA_DB_NAME'))
