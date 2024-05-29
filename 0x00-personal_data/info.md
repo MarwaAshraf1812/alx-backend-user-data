@@ -93,3 +93,44 @@ How does the function work?
         mysql.connector.connection.MySQLConnection: A connection object representing a connection to the MySQL database.
 
 ==============================
+task 4
+How does function work ?
+
+    This function ensures that each row from the users table is logged in a filtered format, as specified by the logger's setup. It encapsulates the process of fetching data from the database and logging it, providing a clear and modular approach to database interaction and logging within the application.
+
+    -- Database Connection and Cursor Setup:
+        database = get_db()
+        => Obtain a database connection using get_db().
+        cursor = database.cursor()
+        => Create a cursor object to execute SQL queries.
+
+    -- Execute SQL Query:
+        cursor.execute("SELECT * FROM users;")
+        => This query selects all rows (*) from the users table 
+        in the connected database.
+        => Execute a SELECT query to fetch all rows from the users table.
+        fields = [i[0] for i in cursor.description]
+        => Retrieve column names from the cursor description.
+    
+    -- Logger Setup:
+        Initialize a logger using get_logger().
+    
+    --Logging Rows:
+        Iterate over each row fetched from the database.
+        Format each row into a string representation using a list comprehension.
+        Log each formatted row using the log.info() method.
+
+        for row in cursor
+         => This loop iterates over each row fetched from the database using the cursor.
+
+        str_row = ''.join(f'{f}={str(r)}; ' for r, f in zip(row, fields))
+        => zip(row, fields) pairs each value in the row with its corresponding field name
+        => {f}={str(r)}; formats each field name and its corresponding value as a string and concatenates them together.
+
+        log.info(str_row.strip())
+        => info() method is used to log an informational message.
+        => removes any leading or trailing whitespace characters from the formatted row string before logging it.
+
+    -- Close Cursor and Database Connection:
+        Close the cursor to release resources.
+        Close the database connection.
