@@ -48,7 +48,7 @@ How does the class's Format Method work?
             return formatted_message
         ```
         The format method is flexible, allowing you to customize the log message format according to your requirements. It's a fundamental part of Python's logging system and provides a powerful way to control how log messages are presented.
-        
+
         detailed :
         --> Calls the format method of the superclass (logging.Formatter), which formats the log record into a string based on the format specified ([HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s).
 
@@ -56,4 +56,6 @@ How does the class's Format Method work?
 
     super().format(record) => Calls the format method of the superclass (logging.Formatter) to format the log record.
 
+================================
+task 2
 
